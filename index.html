@@ -1,0 +1,369 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .quiz-container {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 600px;
+      padding: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #answers button {
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 10px;
+      margin: 5px;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #answers button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="quiz">
+      <div id="question-container">
+        <h2 id="question"></h2>
+        <div id="answers"></div>
+      </div>
+      <button id="next-btn" class="hidden">Next</button>
+      <div id="result" class="hidden"></div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        question: "What is the capital of France?",
+        answers: ["Berlin", "Madrid", "Paris", "Rome"],
+        correct: 2,
+      },
+      {
+        question: "Who wrote 'Hamlet'?",
+        answers: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
+        correct: 1,
+      },
+      {
+        question: "What is the largest planet in our solar system?",
+        answers: ["Earth", "Mars", "Jupiter", "Saturn"],
+        correct: 2,
+      },
+      {
+        question: "What is the chemical symbol for water?",
+        answers: ["H2O", "O2", "CO2", "HO"],
+        correct: 0,
+      },
+      {
+        question: "Which year did World War II end?",
+        answers: ["1945", "1939", "1918", "1965"],
+        correct: 0,
+      },
+      {
+        question: "What is the fastest land animal?",
+        answers: ["Cheetah", "Lion", "Horse", "Tiger"],
+        correct: 0,
+      },
+      {
+        question: "Which planet is known as the Red Planet?",
+        answers: ["Venus", "Mars", "Mercury", "Jupiter"],
+        correct: 1,
+      },
+      {
+        question: "What is the square root of 64?",
+        answers: ["6", "7", "8", "9"],
+        correct: 2,
+      },
+      {
+        question: "Who painted the Mona Lisa?",
+        answers: ["Vincent van Gogh", "Leonardo da Vinci", "Pablo Picasso", "Claude Monet"],
+        correct: 1,
+      },
+      {
+        question: "What is the smallest prime number?",
+        answers: ["0", "1", "2", "3"],
+        correct: 2,
+      },
+    ];
+
+    const quizContainer = document.getElementById("quiz");
+    const questionElement = document.getElementById("question");
+    const answersElement = document.getElementById("answers");
+    const nextButton = document.getElementById("next-btn");
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    function loadQuestion() {
+      resetState();
+      const currentQuestion = questions[currentQuestionIndex];
+      questionElement.innerText = currentQuestion.question;
+
+      currentQuestion.answers.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.innerText = answer;
+        button.classList.add("answer-btn");
+        button.onclick = () => selectAnswer(index);
+        answersElement.appendChild(button);
+      });
+    }
+
+    function resetState() {
+      while (answersElement.firstChild) {
+        answersElement.removeChild(answersElement.firstChild);
+      }
+      nextButton.classList.add("hidden");
+    }
+
+    function selectAnswer(selected) {
+      const correct = questions[currentQuestionIndex].correct;
+      if (selected === correct) {
+        score++;
+      }
+      document.querySelectorAll(".answer-btn").forEach((btn, index) => {
+        btn.disabled = true;
+        if (index === correct) {
+          btn.style.backgroundColor = "green";
+        } else {
+          btn.style.backgroundColor = "red";
+        }
+      });
+      nextButton.classList.remove("hidden");
+    }
+
+    nextButton.addEventListener("click", () => {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < questions.length) {
+        loadQuestion();
+      } else {
+        showResults();
+      }
+    });
+
+    function showResults() {
+      quizContainer.innerHTML = `
+        <h2>Your score: ${score} / ${questions.length}</h2>
+        <button onclick="restartQuiz()">Restart</button>
+      `;
+    }
+
+    function restartQuiz() {
+      currentQuestionIndex = 0;
+      score = 0;
+      quizContainer.innerHTML = `
+        <div id="question-container">
+          <h2 id="question"></h2>
+          <div id="answers"></div>
+        </div>
+        <button id="next-btn" class="hidden">Next</button>
+      `;
+      nextButton.classList.add("hidden");
+      loadQuestion();
+    }
+
+    loadQuestion();
+  </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .quiz-container {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 90%;
+      max-width: 600px;
+      padding: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #answers button {
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 10px;
+      margin: 5px;
+      width: 100%;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #answers button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <div id="quiz-setup">
+      <h2>Welcome to the Quiz!</h2>
+      <label for="question-count">How many questions do you want to answer?</label>
+      <select id="question-count">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
+      <button id="start-btn">Start Quiz</button>
+    </div>
+    <div id="quiz" class="hidden">
+      <div id="question-container">
+        <h2 id="question"></h2>
+        <div id="answers"></div>
+      </div>
+      <button id="next-btn" class="hidden">Next</button>
+    </div>
+    <div id="result" class="hidden"></div>
+  </div>
+
+  <script>
+    const allQuestions = [
+      { question: "What is the capital of France?", answers: ["Berlin", "Madrid", "Paris", "Rome"], correct: 2 },
+      { question: "Who wrote 'Hamlet'?", answers: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"], correct: 1 },
+      { question: "What is the largest planet in our solar system?", answers: ["Earth", "Mars", "Jupiter", "Saturn"], correct: 2 },
+      { question: "What is the chemical symbol for water?", answers: ["H2O", "O2", "CO2", "HO"], correct: 0 },
+      { question: "Which year did World War II end?", answers: ["1945", "1939", "1918", "1965"], correct: 0 },
+      { question: "What is the fastest land animal?", answers: ["Cheetah", "Lion", "Horse", "Tiger"], correct: 0 },
+      { question: "Which planet is known as the Red Planet?", answers: ["Venus", "Mars", "Mercury", "Jupiter"], correct: 1 },
+      { question: "What is the square root of 64?", answers: ["6", "7", "8", "9"], correct: 2 },
+      { question: "Who painted the Mona Lisa?", answers: ["Vincent van Gogh", "Leonardo da Vinci", "Pablo Picasso", "Claude Monet"], correct: 1 },
+      { question: "What is the smallest prime number?", answers: ["0", "1", "2", "3"], correct: 2 },
+      { question: "What is the currency of Japan?", answers: ["Yen", "Won", "Dollar", "Euro"], correct: 0 },
+      { question: "Which element has the chemical symbol 'O'?", answers: ["Oxygen", "Gold", "Osmium", "Helium"], correct: 0 },
+      { question: "Which is the longest river in the world?", answers: ["Amazon", "Nile", "Yangtze", "Mississippi"], correct: 1 },
+    ];
+
+    const quizContainer = document.getElementById("quiz");
+    const questionElement = document.getElementById("question");
+    const answersElement = document.getElementById("answers");
+    const nextButton = document.getElementById("next-btn");
+    const resultContainer = document.getElementById("result");
+    const setupContainer = document.getElementById("quiz-setup");
+    const startButton = document.getElementById("start-btn");
+    const questionCountSelector = document.getElementById("question-count");
+
+    let selectedQuestions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let totalQuestions = 5;
+
+    function startQuiz() {
+      setupContainer.classList.add("hidden");
+      quizContainer.classList.remove("hidden");
+
+      // Get selected number of questions
+      totalQuestions = parseInt(questionCountSelector.value);
+
+      // Shuffle and select unique questions
+      selectedQuestions = [...allQuestions].sort(() => 0.5 - Math.random()).slice(0, totalQuestions);
+
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      resetState();
+      const currentQuestion = selectedQuestions[currentQuestionIndex];
+      questionElement.innerText = currentQuestion.question;
+
+      currentQuestion.answers.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.innerText = answer;
+        button.classList.add("answer-btn");
+        button.onclick = () => selectAnswer(index);
+        answersElement.appendChild(button);
+      });
+    }
+
+    function resetState() {
+      while (answersElement.firstChild) {
+        answersElement.removeChild(answersElement.firstChild);
+      }
+      nextButton.classList.add("hidden");
+    }
+
+    function selectAnswer(selected) {
+      const correct = selectedQuestions[currentQuestionIndex].correct;
+      if (selected === correct) {
+        score++;
+      }
+      document.querySelectorAll(".answer-btn").forEach((btn, index) => {
+        btn.disabled = true;
+        btn.style.backgroundColor = index === correct ? "green" : "red";
+      });
+      nextButton.classList.remove("hidden");
+    }
+
+    nextButton.addEventListener("click", () => {
+      currentQuestionIndex++;
+      if (currentQuestionIndex < selectedQuestions.length) {
+        loadQuestion();
+      } else {
+        showResults();
+      }
+    });
+
+    function showResults() {
+      quizContainer.classList.add("hidden");
+      resultContainer.classList.remove("hidden");
+      resultContainer.innerHTML = `
+        <h2>Your score: ${score} / ${selectedQuestions.length}</h2>
+        <button onclick="restartQuiz()">Restart Quiz</button>
+      `;
+    }
+
+    function restartQuiz() {
+      resultContainer.classList.add("hidden");
+      setupContainer.classList.remove("hidden");
+
+      currentQuestionIndex = 0;
+      score = 0;
+    }
+
+    startButton.addEventListener("click", startQuiz);
+  </script>
+</body>
+</html>
